@@ -1,7 +1,5 @@
 ﻿:root {
     --bg: #0b1221;
-    --surface: rgba(16, 24, 40, 0.95);
-    --surface-soft: rgba(15, 23, 42, 0.9);
     --card-bg: rgba(20, 31, 50, 0.92);
     --text: #f8fafc;
     --text-dimmed: #94a3b8;
@@ -36,6 +34,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 999px;
 }
 
+/* NAVBAR DESIGN */
 .navbar {
     width: 100%;
     display: flex;
@@ -89,6 +88,7 @@ body::-webkit-scrollbar-thumb {
     gap: 12px;
 }
 
+/* UNIVERSAL UTILITY BUTTONS */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -121,7 +121,7 @@ body::-webkit-scrollbar-thumb {
 .btn-large { min-height: 52px; padding: 0 28px; }
 .btn-small { min-height: 38px; padding: 0 16px; font-size: 0.88rem; }
 
-/* REPLACED CUSTOMER BENEFITS GRID */
+/* MARKETING BENEFITS & ICON ANIMATIONS */
 .features-promo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -134,23 +134,49 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid var(--border-subtle);
     border-radius: 20px;
     padding: 28px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Add a subtle lift and glowing orange border to the active card */
 .promo-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(251, 146, 60, 0.3);
+    transform: translateY(-6px);
+    border-color: rgba(251, 146, 60, 0.4);
+    box-shadow: 0 10px 25px rgba(251, 146, 60, 0.05);
 }
 
+/* Base icon styling with explicit transitions */
 .promo-icon {
-    font-size: 2rem;
+    font-size: 2.3rem;
     margin-bottom: 16px;
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center bottom;
+}
+
+/* 1. Mix & Match Icon: Rocks gently side to side like a boiling bowl */
+.promo-card:hover .mix-match-icon {
+    animation: rockBowl 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes rockBowl {
+    0% { transform: translateY(-4px) rotate(-6deg); }
+    100% { transform: translateY(-4px) rotate(6deg); }
+}
+
+/* 2. Eco Icon: Sprout pops upwards and scales up proudly */
+.promo-card:hover .eco-icon {
+    transform: translateY(-5px) scale(1.15);
+}
+
+/* 3. Strict Hygiene Icon: Sparkles spin full 360 degrees smoothly */
+.promo-card:hover .strict-icon {
+    transform: rotate(360deg) scale(1.1);
 }
 
 .promo-card h3 { margin: 0 0 10px 0; font-size: 1.25rem; }
 .promo-card p { margin: 0; font-size: 0.9rem; color: var(--text-dimmed); line-height: 1.6; }
 
-/* MENU SHOWCASE STYLE */
+/* FOOD CARD PREVIEWS */
 .menu-items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -175,7 +201,7 @@ body::-webkit-scrollbar-thumb {
 .card-footer-action { display: flex; justify-content: space-between; align-items: center; }
 .item-price { font-size: 1.4rem; font-weight: 700; color: #fff; }
 
-/* SEARCH BAR LAYOUT */
+/* TRACKING INPUT ROW */
 .tracker-input-wrapper {
     display: flex;
     gap: 12px;
@@ -194,17 +220,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 0.95rem;
 }
 
-/* ADMINISTRATIVE WORKSPACE INTERACTION RULES */
-.secure-form-layout { display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
-.form-group-element { display: flex; flex-direction: column; gap: 6px; }
-.form-group-element label { font-size: 0.82rem; color: var(--text-dimmed); font-weight: 600; }
-.form-group-element input, .form-group-element select, .form-group-element textarea {
-    background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; color: #fff; font-family: inherit;
-}
-.form-group-element textarea { resize: none; height: 90px; }
-.staff-header-profile { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.03); padding: 14px 20px; border-radius: 14px; border: 1px solid var(--border-subtle); }
-
-/* MAIN DESIGN SYSTEM PATTERNS */
+/* PAGE ARCHITECTURE RULES */
 .hero-container { width: 84%; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 48px; padding: 80px 0 60px; }
 .hero-tag { display: inline-flex; padding: 8px 16px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
 .hero-container h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.15; margin: 0 0 20px 0; letter-spacing: -0.03em; }
@@ -215,7 +231,7 @@ body::-webkit-scrollbar-thumb {
 .mockup-header { display: flex; gap: 8px; margin-bottom: 20px; }
 .dot { width: 9px; height: 9px; border-radius: 50%; }
 .mockup-body { display: grid; gap: 14px; }
-.mockup-line { height: 12px; border-radius: 99px; background: rgba(255, 255, 255, 0.06); }
+.mockup-line { height: 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); }
 .mockup-line.wide { width: 80%; }
 .mockup-line.medium { width: 50%; }
 .mockup-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
@@ -230,17 +246,7 @@ body::-webkit-scrollbar-thumb {
 .section-header p { color: var(--text-dimmed); font-size: 0.98rem; margin: 0; }
 
 .engagement-grid { display: grid; gap: 20px; }
-.engagement-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.overview-card { background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 16px; }
-.overview-card h4 { color: var(--text-dimmed); font-size: 0.75rem; text-transform: uppercase; margin: 0 0 6px 0; }
-.overview-card h2 { font-size: 1.6rem; margin: 0; color: #fff; }
 .engagement-card { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 28px; }
-
-.status-badge { display: inline-flex; padding: 4px 10px; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--text-dimmed); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-.status-badge.live { color: #fb923c; background: rgba(251, 146, 60, 0.1); }
-.progress-box h4 { margin: 0 0 6px 0; font-size: 0.85rem; color: var(--text-dimmed); }
-.progress { height: 8px; background: rgba(255,255,255,0.05); border-radius: 99px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--accent); }
 
 .activity { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 14px; border: 1px solid var(--border-subtle); }
 .activity-left h4 { margin: 0 0 4px 0; font-size: 0.95rem; }
@@ -249,7 +255,7 @@ body::-webkit-scrollbar-thumb {
 
 .footer-content { width: 84%; max-width: 1280px; margin: 80px auto 20px; padding-top: 20px; border-top: 1px solid var(--border-subtle); color: var(--text-dimmed); font-size: 0.82rem; text-align: center; }
 
-/* MEDIA HOOKS */
+/* RESPONSIVE LAYOUTS */
 @media (max-width: 1024px) {
     .hero-container { grid-template-columns: 1fr; text-align: center; }
     .hero-cta { justify-content: center; }
@@ -257,5 +263,4 @@ body::-webkit-scrollbar-thumb {
 }
 @media (max-width: 768px) {
     .navbar { flex-direction: column; gap: 12px; text-align: center; }
-    .engagement-overview { grid-template-columns: 1fr; }
 }

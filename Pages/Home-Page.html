@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HawkerHub — Smart Hawker Centre Management & Ordering Ecosystem</title>
+    <title>HawkerHub — Authentic Local Flavors, Smartly Delivered</title>
     <link rel="stylesheet" href="Css/css.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,8 +12,8 @@
 <body>
 
     <header class="navbar">
-        <div class="logo" onclick="exitToHomepage()">Hawker<span>Hub</span></div>
-        <nav id="customer-nav-links">
+        <div class="logo" onclick="scrollToTop()">Hawker<span>Hub</span></div>
+        <nav>
             <ul class="nav-links">
                 <li><a href="#customer-benefits">Our Core Benefits</a></li>
                 <li><a href="#browse-preview">Explore Menus</a></li>
@@ -21,12 +21,11 @@
             </ul> 
         </nav>
         <div class="nav-buttons">
-            <button id="portalToggleBtn" class="btn btn-secondary btn-small" onclick="switchToStaffView(true)">🔒 Staff Portal Login</button>
-            <button id="exitPortalBtn" class="btn btn-secondary btn-small" style="display: none;" onclick="switchToStaffView(false)">← Back to Home</button>
+            <button class="btn btn-secondary btn-small">🔒 Staff Portal Login</button>
         </div>
     </header>
 
-    <div id="customer-view-container">
+    <main id="customer-view-container">
         
         <section class="hero-container">
             <div class="hero-text">
@@ -73,17 +72,17 @@
 
             <div class="features-promo-grid">
                 <div class="promo-card">
-                    <div class="promo-icon">🍲</div>
+                    <div class="promo-icon mix-match-icon">🍲</div>
                     <h3>Mix & Match Basket</h3>
                     <p>Craving chicken rice but your family wants nasi lemak? Add plates from completely different independent stalls into one order basket. Pay once, eat together.</p>
                 </div>
                 <div class="promo-card">
-                    <div class="promo-icon">🌱</div>
+                    <div class="promo-icon eco-icon">🌱</div>
                     <h3>Eco-Friendly Packaging</h3>
                     <p>Opt-in for premium biodegradable food packaging arrays during checkout. Join thousands of users collectively reducing single-use macroplastics across our city.</p>
                 </div>
                 <div class="promo-card">
-                    <div class="promo-icon">✨</div>
+                    <div class="promo-icon strict-icon">✨</div>
                     <h3>Strict Hygiene Auditing</h3>
                     <p>Dine with complete peace of mind. Every kitchen listed on our grid undergoes strict government safety tracking to guarantee top-tier health standards.</p>
                 </div>
@@ -95,7 +94,7 @@
         <section id="browse-preview" class="portals-section">
             <div class="section-header">
                 <h2>Curated Culinary Arts Showcase</h2>
-                <p>Preview top operating vendor offerings running on our cloud integration infrastructure components.</p>
+                <p>Explore legendary local favorites and hidden gems, delivered straight to your doorstep.</p>
             </div>
 
             <div class="menu-items-grid">
@@ -107,7 +106,7 @@
                     <p>Poached chicken elements served over jasmine grains seasoned with organic ginger purees.</p>
                     <div class="card-footer-action">
                         <span class="item-price">$5.50</span>
-                        <button class="btn btn-secondary btn-small" onclick="simulateAppLaunch('Ordering App Terminal')">Launch Order Interface</button>
+                        <button class="btn btn-secondary btn-small" onclick="simulateAppLaunch()">Launch Order Interface</button>
                     </div>
                 </div>
 
@@ -119,7 +118,7 @@
                     <p>Aromatic coconut milk rice accompanied by crisped anchovies, spicy sambal variable packs, and egg configurations.</p>
                     <div class="card-footer-action">
                         <span class="item-price">$6.50</span>
-                        <button class="btn btn-secondary btn-small" onclick="simulateAppLaunch('Ordering App Terminal')">Launch Order Interface</button>
+                        <button class="btn btn-secondary btn-small" onclick="simulateAppLaunch()">Launch Order Interface</button>
                     </div>
                 </div>
             </div>
@@ -130,19 +129,19 @@
         <section id="track-terminal" class="portals-section">
             <div class="engagement-grid" style="grid-template-columns: 1fr;">
                 <div class="engagement-card">
-                    <h2>Live Infrastructure Order Tracker</h2>
-                    <p style="color:var(--text-dimmed); font-size:0.9rem; margin-top:-5px; margin-bottom:20px;">Input an application tracking variable code parameter below to locate active preparation streams.</p>
+                    <h2>Live Order Status Tracker</h2>
+                    <p style="color:var(--text-dimmed); font-size:0.9rem; margin-top:-5px; margin-bottom:20px;">Enter your unique receipt number below to locate your active meal delivery stream.</p>
                     
                     <div class="tracker-input-wrapper">
-                        <input type="text" id="order-search-input" placeholder="Enter Order ID Parameter (e.g., TX-4821)">
-                        <button class="btn btn-primary" onclick="executeTrackerSearch()">Query System Node</button>
+                        <input type="text" id="order-search-input" placeholder="Enter Order ID (e.g., TX-4821)">
+                        <button class="btn btn-primary" onclick="executeTrackerSearch()">Locate My Meal</button>
                     </div>
 
                     <div id="tracker-result-box" style="margin-top: 25px; display: none;">
                         <div class="activity">
                             <div class="activity-left">
                                 <h4 id="res-id-title">TX-4821 — 1x Consolidated Cross-Stall Order</h4>
-                                <p id="res-sub-detail">Gross Payment: $12.00 | Network Splitting: Approved</p>
+                                <p id="res-sub-detail">Payment Method: Online Card | Eco-Packaging Verified</p>
                             </div>
                             <div id="res-status-badge" class="activity-status">Preparing at Stall #03</div>
                         </div>
@@ -150,113 +149,11 @@
                 </div>
             </div>
         </section>
-    </div>
-
-    <div id="staff-view-container" style="display: none;">
-        <section class="portals-section" style="padding-top: 40px;">
-            
-            <div id="portal-login-form-view" class="engagement-card" style="max-width: 550px; margin: 0 auto;">
-                <h2 style="margin-top: 0;">Internal Administration Access</h2>
-                <p style="color:var(--text-dimmed); font-size:0.9rem; margin-bottom:20px;">Access restricted to authorized personnel. Select terminal profile parameters:</p>
-                <div class="form-group-element" style="margin-bottom:15px;">
-                    <label>Target Operational Domain</label>
-                    <select id="staff-role-selector">
-                        <option value="vendor">Stall Vendor / Merchant Operations Panel</option>
-                        <option value="nea">NEA Statutory Enforcement Officer Portal</option>
-                        <option value="admin">Platform Core Administrator & BI Analytics</option>
-                    </select>
-                </div>
-                <div class="form-group-element" style="margin-bottom:20px;">
-                    <label>Enterprise Verification Passcode</label>
-                    <input type="password" value="XXXXXXXXXX" placeholder="Enter Security Code ID">
-                </div>
-                <button class="btn btn-primary" style="width:100%;" onclick="authenticateStaffLogin()">Authenticate Profile & Open Workspace</button>
-            </div>
-
-            <div id="portal-authenticated-view" style="display:none;">
-                <div class="staff-header-profile">
-                    <span id="staff-badge" class="status-badge live">Staff Verified</span>
-                    <button class="btn btn-secondary btn-small" onclick="logoutStaffPortal()">Log Out Terminal</button>
-                </div>
-
-                <div class="divider-line" style="width:100%; margin: 25px 0;"></div>
-
-                <div id="dashboard-vendor" class="staff-dashboard-subview" style="display:none;">
-                    <div class="section-header">
-                        <h2>Merchant Terminal Control</h2>
-                        <p>Manage menus across cuisines and real-time digital ticket processing pipelines.</p>
-                    </div>
-                    <div class="engagement-overview" style="margin-bottom:25px; gap:12px;">
-                        <div class="overview-card"><h4>Active Line</h4><h2>3 Slots</h2></div>
-                        <div class="overview-card"><h4>Stall Net</h4><h2>$1,240.50</h2></div>
-                        <div class="overview-card"><h4>Rental Days</h4><h2>284 Left</h2></div>
-                    </div>
-                    <div class="engagement-card">
-                        <h4 style="margin:0 0 15px 0;">Active Incoming Inbound Tickets</h4>
-                        <div class="activity">
-                            <div class="activity-left"><h4>Order #1024 — Chicken Rice</h4><p>Eco-Box Checked | Addon Meat Approved</p></div>
-                            <button class="btn btn-secondary btn-small" onclick="this.parentElement.remove()">Complete Item</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dashboard-nea" class="staff-dashboard-subview" style="display:none;">
-                    <div class="section-header">
-                        <h2>NEA Health & Safety Audit Log Engine</h2>
-                        <p>Log statutory environment fields directly into database index parameters.</p>
-                    </div>
-                    <div class="engagement-card">
-                        <form onsubmit="event.preventDefault(); submitNeaInspectionLog();" class="secure-form-layout">
-                            <div class="form-group-element">
-                                <label>Target Facility Stall ID</label>
-                                <input type="text" id="ins-stall-id" placeholder="e.g. Stall #03 Signature Chicken Rice" required>
-                            </div>
-                            <div class="form-group-element">
-                                <label>Statutory Hygiene Grade Level</label>
-                                <select id="ins-hygiene-grade">
-                                    <option value="A">Hygiene Grade A (Excellent Safety Compliance)</option>
-                                    <option value="B">Hygiene Grade B (Standard Safe Architecture)</option>
-                                </select>
-                            </div>
-                            <div class="form-group-element">
-                                <label>Inspector Assessment Metric Score (0-100)</label>
-                                <input type="number" min="0" max="100" placeholder="e.g. 96" required>
-                            </div>
-                            <div class="form-group-element">
-                                <label>Audit Case Logs & Deficiencies Remarks</label>
-                                <textarea id="ins-remarks" placeholder="Log details regarding structural contamination tests..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="align-self: start;">Commit Evaluation Parameters</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div id="dashboard-admin" class="staff-dashboard-subview" style="display:none;">
-                    <div class="section-header">
-                        <h2>Platform BI Telemetry & Analytics Hub</h2>
-                        <p>Hourly sales velocity tracking trends, center load balancing, and operational insights charts.</p>
-                    </div>
-                    <div class="engagement-grid" style="grid-template-columns: 1fr; gap: 20px;">
-                        <div class="engagement-card">
-                            <div class="progress-box">
-                                <h4>Public Grievance Resolution Matrix Efficiency</h4>
-                                <div class="progress"><div class="progress-fill" style="width: 91.4%;"></div></div>
-                                <small style="color:var(--text-dimmed); margin-top:5px; display:block;">91.4% running automation compliance score.</small>
-                            </div>
-                            <div style="background:rgba(0,0,0,0.3); height:160px; border-radius:14px; border:1px dashed var(--border-subtle); display:grid; place-items:center; margin-top:20px;">
-                                <span style="color:var(--text-dimmed); font-size:0.82rem;">[Macro Analytical Graph Engine Nodes Initialized Online]</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </div>
+    </main>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2026 HawkerHub Global Technologies Pte Ltd. All platform marketing and management frameworks are registered.</p>
+            <p>&copy; 2026 HawkerHub Global Technologies Pte Ltd. All platform marketing frameworks are registered.</p>
         </div>
     </footer>
 
