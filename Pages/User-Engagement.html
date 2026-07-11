@@ -1,414 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>HawkerHub | User Engagement</title>
-
-    <link rel="stylesheet" href="Css/Css.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>HawkerHub • User Engagement Dashboard</title>
+    <link rel="stylesheet" href="Css/css.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+<body class="engagement-page">
 
-<body>
-
-    <!-- ================= NAVIGATION ================= -->
-
+    <!-- ===== NAVIGATION ===== -->
     <header class="navbar">
-
-        <div class="logo">
-            Hawker<span>Hub</span>
-        </div>
-
+        <div class="logo" onclick="window.location.href='index.html'">Hawker<span>Hub</span></div>
         <nav>
-
             <ul class="nav-links">
-
-                <li><a href="Home.html">Home</a></li>
-
-                <li><a href="#" class="active">User Engagement</a></li>
-
-                <li><a href="#">Loyalty Rewards</a></li>
-
-                <li><a href="#">Notifications</a></li>
-
-                <li><a href="#">Customer Reviews</a></li>
-
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#rewards">Rewards</a></li>
+                <li><a href="#feedback">Feedback</a></li>
             </ul>
-
         </nav>
-
         <div class="nav-buttons">
-
-            <a href="#" class="btn btn-secondary">Back</a>
-
-            <a href="#" class="btn btn-primary">Manage Users</a>
-
+            <select id="languageSelector" class="language-select" onchange="changeDashboardLanguage()">
+                <option value="en">🇬🇧 English</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+            </select>
+            <button class="btn btn-secondary btn-small" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
         </div>
-
     </header>
 
-    <!-- ================= HERO ================= -->
+    <!-- ===== MAIN DASHBOARD ===== -->
+    <main class="engagement-main">
 
-    <section class="user-hero">
-
-        <div class="user-header">
-
-            <span class="user-tag">
-                Customer Retention Portal
-            </span>
-
-            <h1>
-                User Engagement Dashboard
-            </h1>
-
-            <p>
-
-                Monitor customer activity, loyalty rewards,
-                favourite meals, promotional campaigns,
-                notifications and user satisfaction
-                through one centralized dashboard.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- ================= OVERVIEW ================= -->
-
-    <section class="engagement-overview">
-
-        <div class="overview-card">
-
-            <h4>Total Registered Users</h4>
-
-            <h2>12,487</h2>
-
-            <span>▲ 8.4% this month</span>
-
-        </div>
-
-        <div class="overview-card">
-
-            <h4>Active Users Today</h4>
-
-            <h2>2,964</h2>
-
-            <span>▲ 12% today</span>
-
-        </div>
-
-        <div class="overview-card">
-
-            <h4>Loyalty Members</h4>
-
-            <h2>8,942</h2>
-
-            <span>72% Participation</span>
-
-        </div>
-
-        <div class="overview-card">
-
-            <h4>Average Rating</h4>
-
-            <h2>4.8 ★</h2>
-
-            <span>Excellent</span>
-
-        </div>
-
-    </section>
-
-    <!-- ================= FIRST ROW ================= -->
-
-    <section class="engagement-grid">
-
-        <div class="engagement-card">
-
-            <h2>🔥 Active Promotions</h2>
-
-            <div class="promotion">
-
-                <h3>Weekend Hawker Deals</h3>
-
-                <p>
-                    Customers receive 10% discount on selected stalls every weekend.
-                </p>
-
+        <!-- HERO -->
+        <section class="user-hero">
+            <div class="user-header">
+                <div class="hero-badge">
+                    <i class="fas fa-chart-line"></i> Live Analytics
+                </div>
+                <h1 id="heroTitle">User Engagement Dashboard</h1>
+                <p id="heroDesc">Monitor customer activity, loyalty rewards, favorite meals, promotional campaigns, notifications and user satisfaction through one centralized dashboard.</p>
             </div>
+        </section>
 
-            <div class="promotion">
-
-                <h3>Double Loyalty Points</h3>
-
-                <p>
-                    Earn double reward points for every purchase above $15.
-                </p>
-
+        <!-- STATS OVERVIEW -->
+        <section id="overview" class="engagement-overview">
+            <div class="overview-card">
+                <div class="overview-icon"><i class="fas fa-users"></i></div>
+                <h4>Active Users</h4>
+                <h2>8,942</h2>
+                <span class="trend-up"><i class="fas fa-arrow-up"></i> +12.4%</span>
             </div>
-
-            <div class="promotion">
-
-                <h3>Free Delivery Campaign</h3>
-
-                <p>
-                    Free delivery for all orders after 8 PM.
-                </p>
-
+            <div class="overview-card">
+                <div class="overview-icon"><i class="fas fa-utensils"></i></div>
+                <h4>Orders Today</h4>
+                <h2>1,283</h2>
+                <span class="trend-up"><i class="fas fa-arrow-up"></i> +8.1%</span>
             </div>
-
-        </div>
-
-        <div class="engagement-card">
-
-            <h2>📢 Notifications</h2>
-
-            <div class="metric">
-
-                <h2>84%</h2>
-
-                <p>Notification Open Rate</p>
-
+            <div class="overview-card">
+                <div class="overview-icon"><i class="fas fa-star"></i></div>
+                <h4>Avg. Rating</h4>
+                <h2>4.8</h2>
+                <span><i class="fas fa-star" style="color:#eab308;"></i> 2,491 reviews</span>
             </div>
-
-            <div class="metric">
-
-                <h2>69%</h2>
-
-                <p>Promotion Click Rate</p>
-
+            <div class="overview-card">
+                <div class="overview-icon"><i class="fas fa-recycle"></i></div>
+                <h4>Eco-Packaging</h4>
+                <h2>94.2%</h2>
+                <span class="trend-up"><i class="fas fa-arrow-up"></i> +3.6%</span>
             </div>
+        </section>
 
-        </div>
+        <!-- MAIN GRID -->
+        <section class="engagement-grid">
 
-    </section>
+            <!-- LEFT COLUMN -->
+            <div class="engagement-grid-left">
 
-    <!-- ================= SECOND ROW ================= -->
-
-    <section class="engagement-grid">
-
-        <div class="engagement-card">
-
-            <h2>❤️ Most Liked Categories</h2>
-
-            <div class="progress-box">
-
-                <h4>Local Delights</h4>
-
-                <div class="progress">
-
-                    <div class="progress-fill" style="width:92%"></div>
-
+                <!-- REWARDS & LOYALTY -->
+                <div id="rewards" class="engagement-card">
+                    <h2><i class="fas fa-gem" style="color:var(--accent);"></i> Loyalty Rewards</h2>
+                    <div class="metric-container">
+                        <div class="metric">
+                            <h2>1,280</h2>
+                            <p>Points Earned</p>
+                        </div>
+                        <div class="metric">
+                            <h2>3</h2>
+                            <p>Active Vouchers</p>
+                        </div>
+                        <div class="metric">
+                            <h2>Gold</h2>
+                            <p>Tier Status</p>
+                        </div>
+                    </div>
+                    <div class="progress-box">
+                        <div class="progress-details">
+                            <span>Progress to Platinum</span>
+                            <span>680 / 1,500 pts</span>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress">
+                                <div class="progress-fill" style="width:45%;"></div>
+                            </div>
+                            <span style="font-size:0.8rem; color:var(--text-dimmed);">45%</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" onclick="simulateRewardClaim()">
+                        <i class="fas fa-gift"></i> Claim Rewards
+                    </button>
                 </div>
 
+                <!-- PROMOTIONAL CAMPAIGNS -->
+                <div class="engagement-card">
+                    <h2><i class="fas fa-megaphone" style="color:var(--accent);"></i> Live Promotions</h2>
+                    <div class="promotion">
+                        <div class="promo-header">
+                            <h3>🌿 Eco-Conscious Monday</h3>
+                            <span class="promo-badge discount">-20%</span>
+                        </div>
+                        <p>Order any eco-packaged meal and enjoy 20% off. Valid all day.</p>
+                    </div>
+                    <div class="promotion">
+                        <div class="promo-header">
+                            <h3>⭐ Stall #03 Special</h3>
+                            <span class="promo-badge points">2x Points</span>
+                        </div>
+                        <p>Double loyalty points on all Hainanese Chicken Rice orders.</p>
+                    </div>
+                    <div class="promotion">
+                        <div class="promo-header">
+                            <h3>🚀 Weekend Flash Deals</h3>
+                            <span class="promo-badge delivery">Free Delivery</span>
+                        </div>
+                        <p>Free delivery on orders above $20 every Saturday & Sunday.</p>
+                    </div>
+                    <button class="btn btn-secondary btn-small btn-full" onclick="dispatchGlobalPromoNotification()">
+                        <i class="fas fa-bullhorn"></i> Broadcast to All Users
+                    </button>
+                </div>
             </div>
 
-            <div class="progress-box">
+            <!-- RIGHT COLUMN -->
+            <div class="engagement-grid-right">
 
-                <h4>Western Cuisine</h4>
-
-                <div class="progress">
-
-                    <div class="progress-fill" style="width:81%"></div>
-
+                <!-- POPULAR ITEMS -->
+                <div class="engagement-card">
+                    <h2><i class="fas fa-fire" style="color:var(--accent);"></i> Trending Dishes</h2>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="trending-rank">#1</span>
+                            <div>
+                                <h4>Hainanese Chicken Rice</h4>
+                                <p>Stall #03 • 342 orders today</p>
+                            </div>
+                        </div>
+                        <div class="trending-like">
+                            <span class="like-counter" id="like-count-1">2,847 Likes</span>
+                            <button class="like-btn" onclick="registerSimulatedLike(1)">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="trending-rank">#2</span>
+                            <div>
+                                <h4>Premium Nasi Lemak</h4>
+                                <p>Stall #08 • 218 orders today</p>
+                            </div>
+                        </div>
+                        <div class="trending-like">
+                            <span class="like-counter" id="like-count-2">1,934 Likes</span>
+                            <button class="like-btn" onclick="registerSimulatedLike(2)">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="trending-rank">#3</span>
+                            <div>
+                                <h4>Char Kway Teow</h4>
+                                <p>Stall #12 • 156 orders today</p>
+                            </div>
+                        </div>
+                        <div class="trending-like">
+                            <span class="like-counter" id="like-count-3">1,572 Likes</span>
+                            <button class="like-btn" onclick="registerSimulatedLike(3)">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-            </div>
-
-            <div class="progress-box">
-
-                <h4>Desserts</h4>
-
-                <div class="progress">
-
-                    <div class="progress-fill" style="width:74%"></div>
-
+                <!-- USER FEEDBACK -->
+                <div id="feedback" class="engagement-card">
+                    <h2><i class="fas fa-comment-dots" style="color:var(--accent);"></i> Live Feedback</h2>
+                    <div id="reviews-feed-container">
+                        <div class="review">
+                            <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"The chicken rice was absolutely perfect! Best I've had in years." <span style="color:var(--text-dimmed); font-size:0.75rem;">• 2 min ago</span></p>
+                        </div>
+                        <div class="review">
+                            <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <p>"Eco-packaging is a game changer. Love the initiative!" <span style="color:var(--text-dimmed); font-size:0.75rem;">• 15 min ago</span></p>
+                        </div>
+                        <div class="review">
+                            <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"Fast delivery and everything was still hot. Impressive!" <span style="color:var(--text-dimmed); font-size:0.75rem;">• 28 min ago</span></p>
+                        </div>
+                    </div>
+                    <div class="inline-form-box">
+                        <h4><i class="fas fa-pen"></i> Share Your Experience</h4>
+                        <div class="form-inputs">
+                            <select id="feedbackRating">
+                                <option value="⭐">⭐</option>
+                                <option value="⭐⭐">⭐⭐</option>
+                                <option value="⭐⭐⭐">⭐⭐⭐</option>
+                                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+                                <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+                            </select>
+                            <input type="text" id="feedbackComment" placeholder="Write your review..." />
+                            <button class="btn btn-primary btn-small" onclick="submitLiveFeedbackRow()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-            </div>
-
-            <div class="progress-box">
-
-                <h4>Drinks</h4>
-
-                <div class="progress">
-
-                    <div class="progress-fill" style="width:68%"></div>
-
+                <!-- COMPLAINT TICKETS -->
+                <div class="engagement-card">
+                    <h2><i class="fas fa-triangle-exclamation" style="color:#ef4444;"></i> Incident Reports</h2>
+                    <div id="complaint-list-container">
+                        <div class="complaint-ticket">
+                            <h4>⚠️ Stall #03 • Delay Report</h4>
+                            <p><strong>Issue:</strong> Order preparation took 25 min</p>
+                            <p>Customer reported longer than expected wait time.</p>
+                            <span style="font-size:0.75rem; color:#fca5a5;">Status: Under Review</span>
+                        </div>
+                        <div class="complaint-ticket">
+                            <h4>⚠️ Stall #08 • Missing Item</h4>
+                            <p><strong>Issue:</strong> Sambal side missing</p>
+                            <p>Customer received order without sambal accompaniment.</p>
+                            <span style="font-size:0.75rem; color:#fca5a5;">Status: Resolved</span>
+                        </div>
+                    </div>
+                    <div class="inline-form-box">
+                        <h4><i class="fas fa-flag"></i> Report an Issue</h4>
+                        <div class="form-inputs vertical">
+                            <select id="complaintStall">
+                                <option value="Stall #03">Stall #03 • Chicken Rice</option>
+                                <option value="Stall #08">Stall #08 • Nasi Lemak</option>
+                                <option value="Stall #12">Stall #12 • Char Kway Teow</option>
+                                <option value="Stall #15">Stall #15 • Laksa</option>
+                            </select>
+                            <input type="text" id="complaintReason" placeholder="Issue type (e.g., Missing item, Delay)" />
+                            <textarea id="complaintDetails" placeholder="Describe the issue in detail..."></textarea>
+                            <button class="btn btn-danger btn-small" onclick="submitStallComplaintTicket()">
+                                <i class="fas fa-exclamation-circle"></i> Submit Report
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+        </section>
+    </main>
 
-        </div>
-
-        <div class="engagement-card">
-
-            <h2>⭐ Customer Reviews</h2>
-
-            <div class="review">
-
-                <div class="review-stars">★★★★★</div>
-
-                <p>
-                    Fast ordering process and excellent food quality.
-                </p>
-
-            </div>
-
-            <div class="review">
-
-                <div class="review-stars">★★★★☆</div>
-
-                <p>
-                    Rewards system makes ordering more enjoyable.
-                </p>
-
-            </div>
-
-            <div class="review">
-
-                <div class="review-stars">★★★★★</div>
-
-                <p>
-                    Multiple stalls can be ordered together easily.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ================= THIRD ROW ================= -->
-
-    <section class="engagement-grid">
-
-        <div class="engagement-card">
-
-            <h2>🕒 Recent User Activity</h2>
-
-            <div class="activity">
-
-                <div class="activity-left">
-
-                    <h4>New Loyalty Registration</h4>
-
-                    <p>2 minutes ago</p>
-
-                </div>
-
-                <div class="activity-status">
-
-                    Completed
-
-                </div>
-
-            </div>
-
-            <div class="activity">
-
-                <div class="activity-left">
-
-                    <h4>Promotion Redeemed</h4>
-
-                    <p>12 minutes ago</p>
-
-                </div>
-
-                <div class="activity-status">
-
-                    Completed
-
-                </div>
-
-            </div>
-
-            <div class="activity">
-
-                <div class="activity-left">
-
-                    <h4>Customer Review Submitted</h4>
-
-                    <p>18 minutes ago</p>
-
-                </div>
-
-                <div class="activity-status">
-
-                    Completed
-
-                </div>
-
-            </div>
-
-            <div class="activity">
-
-                <div class="activity-left">
-
-                    <h4>Complaint Resolved</h4>
-
-                    <p>31 minutes ago</p>
-
-                </div>
-
-                <div class="activity-status">
-
-                    Resolved
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="engagement-card">
-
-            <h2>🏆 Loyalty Rewards</h2>
-
-            <div class="metric">
-
-                <h2>18,450</h2>
-
-                <p>Points Redeemed</p>
-
-            </div>
-
-            <div class="metric">
-
-                <h2>2,184</h2>
-
-                <p>Rewards Claimed</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ================= FOOTER ================= -->
-
+    <!-- ===== FOOTER ===== -->
     <footer>
-
         <div class="footer-content">
-
-            <p>
-
-                © 2026 HawkerHub Technologies Pte Ltd.
-                User Engagement & Customer Experience Portal.
-
-            </p>
-
+            <p>&copy; 2026 HawkerHub Global Technologies Pte Ltd. All platform marketing frameworks are registered.</p>
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
         </div>
-
     </footer>
 
+    <script src="Js/homepagescript.js"></script>
 </body>
-
 </html>
