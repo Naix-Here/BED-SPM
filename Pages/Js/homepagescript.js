@@ -3,6 +3,10 @@
  * 2026 Core Interface Operations File
  */
 
+function goToLogin() {
+    window.location.href = "Login.html";
+}
+
 // ============================================================
 // SECTION 1: MULTI-LANGUAGE SUPPORT
 // ============================================================
