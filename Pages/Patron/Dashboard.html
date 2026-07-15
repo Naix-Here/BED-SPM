@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HawkerHub | Patron Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Css/patron.css">
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="../Home-Page.html">Hawker<span>Hub</span></a>
+        <nav class="nav-links"><a class="active" href="Dashboard.html">Discover</a><a href="OrderHistory.html">My orders</a><a href="Voucher.html">Vouchers</a></nav>
+        <div class="nav-actions"><a class="cart-link" href="Cart.html">Cart <span>2</span></a><a class="avatar" href="Profile.html">JS</a></div>
+    </header>
+    <main class="page-shell">
+        <section class="welcome-banner">
+            <div><span class="eyebrow">Good afternoon, Jamie</span><h1>What are you craving today?</h1><p>Fresh local favourites from trusted hawker stalls, all in one order.</p></div>
+            <a class="btn btn-primary" href="#menu">Browse dishes</a>
+        </section>
+        <section class="quick-grid">
+            <a class="quick-card" href="OrderHistory.html"><strong>Track an order</strong><span>TX-4821 · Preparing now</span></a>
+            <a class="quick-card" href="Voucher.html"><strong>3 vouchers available</strong><span>Save on your next meal</span></a>
+            <a class="quick-card" href="Profile.html"><strong>1,280 reward points</strong><span>Gold member</span></a>
+        </section>
+        <section id="menu" class="section-heading"><div><span class="eyebrow">Curated for you</span><h2>Popular near you</h2><p>Comforting classics, ready when you are.</p></div><a class="text-link" href="#all-dishes">View all dishes →</a></section>
+        <section id="all-dishes" class="dish-grid">
+            <article class="dish-card"><div class="dish-image orange">🍗</div><div class="dish-content"><span class="stall-label">Stall #03 · Signature Poultry</span><h3>Hainanese Chicken Rice</h3><p>Poached chicken, fragrant rice and house-made chilli.</p><div class="dish-footer"><strong>$5.50</strong><a class="btn btn-secondary btn-small" href="Cart.html">Add to cart</a></div></div></article>
+            <article class="dish-card"><div class="dish-image yellow">🍛</div><div class="dish-content"><span class="stall-label">Stall #08 · Traditional Malay</span><h3>Premium Nasi Lemak</h3><p>Coconut rice with sambal, anchovies, egg and chicken wing.</p><div class="dish-footer"><strong>$6.50</strong><a class="btn btn-secondary btn-small" href="Cart.html">Add to cart</a></div></div></article>
+            <article class="dish-card"><div class="dish-image red">🍜</div><div class="dish-content"><span class="stall-label">Stall #12 · Wok Classics</span><h3>Char Kway Teow</h3><p>Smoky wok-fried noodles with egg, prawns and cockles.</p><div class="dish-footer"><strong>$5.00</strong><a class="btn btn-secondary btn-small" href="Cart.html">Add to cart</a></div></div></article>
+        </section>
+    </main>
+    <footer>© 2026 HawkerHub Global Technologies Pte Ltd.</footer>
+</body>
+</html>
