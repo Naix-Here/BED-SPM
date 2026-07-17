@@ -406,6 +406,41 @@ body {
     color: var(--text);
 }
 
+/* TOP SELLER SPECIFIC INTERACTION RULES */
+.top-seller-card {
+    border: 1px solid rgba(251, 146, 60, 0.15);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease, 
+                background-color 0.3s ease;
+}
+
+/* Hover Toggle Effects */
+.top-seller-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--accent);
+    background-color: rgba(25, 38, 61, 0.96);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 
+                0 0 20px rgba(251, 146, 60, 0.06);
+}
+
+.top-seller-card .food-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.top-seller-card .trending-like {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
 /* LIVE STATUS TRACKER CONTROLS */
 .tracker-input-wrapper {
     display: flex;
