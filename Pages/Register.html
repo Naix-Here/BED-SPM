@@ -19,7 +19,7 @@
 <body class="auth-page">
 
 <header class="navbar">
-    <div class="logo" onclick="window.location='Home.html'">
+    <div class="logo" onclick="window.location='Home-Page.html'">
         Hawker<span>Hub</span>
     </div>
 </header>
@@ -39,29 +39,29 @@ Create an account to order from multiple stalls and
 track your favourite meals.
 </p>
 
-<form>
+<form id="register-form">
 
 <div class="input-group">
 <label>Full Name</label>
-<input type="text">
+<input name="name" type="text" required>
 </div>
 
 <div class="input-group">
 <label>Email</label>
-<input type="email">
+<input name="email" type="email" required>
 </div>
 
 <div class="input-group">
 <label>Password</label>
-<input type="password">
+<input name="password" type="password" minlength="8" required>
 </div>
 
 <div class="input-group">
 <label>Confirm Password</label>
-<input type="password">
+<input name="confirmPassword" type="password" minlength="8" required>
 </div>
 
-<button class="btn btn-primary btn-full">
+<button type="submit" class="btn btn-primary btn-full">
 Create Account
 </button>
 

@@ -15,7 +15,7 @@
 <body class="auth-page">
 
 <header class="navbar">
-    <div class="logo" onclick="window.location='Home.html'">
+    <div class="logo" onclick="window.location='Home-Page.html'">
         Hawker<span>Hub</span>
     </div>
 </header>
@@ -33,19 +33,19 @@
             or access the HawkerHub management portal.
         </p>
 
-        <form>
+        <form id="login-form">
 
             <div class="input-group">
                 <label>Email</label>
-                <input type="email" placeholder="example@email.com">
+                <input name="email" type="email" placeholder="example@email.com" required>
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" placeholder="Password">
+                <input name="password" type="password" placeholder="Password" required>
             </div>
 
-            <button class="btn btn-primary btn-full">
+            <button type="submit" class="btn btn-primary btn-full">
                 Login
             </button>
 

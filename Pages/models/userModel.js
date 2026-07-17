@@ -1,0 +1,4 @@
+const { sql, getPool } = require('../config/database');
+async function findByCredentials(email, passwordHash) { const result = await (await getPool()).request().input('email', sql.NVarChar(120), email).input('passwordHash', sql.VarChar(64), passwordHash).query('SELECT UserId, FullName, Email, Role FROM dbo.Users WHERE Email=@email AND PasswordHash=@passwordHash AND IsActive=1'); return result.recordset[0]; }
+async function createPatron(name, email, passwordHash) { const result = await (await getPool()).request().input('name', sql.NVarChar(100), name).input('email', sql.NVarChar(120), email).input('passwordHash', sql.VarChar(64), passwordHash).query("INSERT INTO dbo.Users (FullName,Email,PasswordHash,Role) OUTPUT INSERTED.UserId VALUES (@name,@email,@passwordHash,'patron')"); return result.recordset[0]; }
+module.exports = { findByCredentials, createPatron };
