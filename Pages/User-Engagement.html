@@ -20,6 +20,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#rewards">Rewards</a></li>
+                <li><a href="#tracking">Live Tracking</a></li>
                 <li><a href="#feedback">Feedback</a></li>
             </ul>
         </nav>
@@ -120,7 +121,7 @@
 
                 <!-- PROMOTIONAL CAMPAIGNS -->
                 <div class="engagement-card">
-                    <h2><i class="fas fa-megaphone" style="color:var(--accent);"></i> Live Promotions</h2>
+                    <h2><i class="fas fa-bullhorn" style="color:var(--accent);"></i> Live Promotions</h2>
                     <div class="promotion">
                         <div class="promo-header">
                             <h3>🌿 Eco-Conscious Monday</h3>
@@ -143,9 +144,55 @@
                         <p>Free delivery on orders above $20 every Saturday & Sunday.</p>
                     </div>
                     <button class="btn btn-secondary btn-small btn-full" onclick="dispatchGlobalPromoNotification()">
-                        <i class="fas fa-bullhorn"></i> Broadcast to All Users
+                        <i class="fas fa-broadcast-tower"></i> Broadcast to All Users
                     </button>
                 </div>
+
+                <!-- REAL-TIME ORDER TRACKING -->
+                <div id="tracking" class="engagement-card">
+                    <h2><i class="fas fa-map-marker-alt" style="color:var(--accent);"></i> Active Order Tracking</h2>
+                    <div class="tracking-board">
+                        <div class="order-info-row">
+                            <div>
+                                <span class="order-id-label">Order Reference:</span>
+                                <strong>#HH-9821-X</strong>
+                            </div>
+                            <span class="eta-badge"><i class="far fa-clock"></i> 12 Mins Away</span>
+                        </div>
+                        
+                        <div class="tracking-timeline">
+                            <div class="timeline-step completed">
+                                <div class="step-bullet"><i class="fas fa-check"></i></div>
+                                <div class="step-content">
+                                    <h4>Order Received</h4>
+                                    <p>Stall accepted transaction successfully</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step completed">
+                                <div class="step-bullet"><i class="fas fa-check"></i></div>
+                                <div class="step-content">
+                                    <h4>Preparing Meal</h4>
+                                    <p>Vendor cooking under standard hygiene guidelines</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step active">
+                                <div class="step-bullet pulse-bullet"></div>
+                                <div class="step-content">
+                                    <h4>Out for Delivery</h4>
+                                    <p>Courier picked up order from transit hub</p>
+                                </div>
+                            </div>
+                            <div class="timeline-step pending">
+                                <div class="step-bullet"></div>
+                                <div class="step-content">
+                                    <h4>Arrived at Destination</h4>
+                                    <p>Delivered dropoff confirmation receipt</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- RIGHT COLUMN -->
@@ -160,6 +207,7 @@
                             <div>
                                 <h4>Hainanese Chicken Rice</h4>
                                 <p>Stall #03 • 342 orders today</p>
+                                <div class="rating-badge-inline"><i class="fas fa-star"></i> 4.9 (1,200 reviews)</div>
                             </div>
                         </div>
                         <div class="trending-like">
@@ -175,6 +223,7 @@
                             <div>
                                 <h4>Premium Nasi Lemak</h4>
                                 <p>Stall #08 • 218 orders today</p>
+                                <div class="rating-badge-inline"><i class="fas fa-star"></i> 4.7 (840 reviews)</div>
                             </div>
                         </div>
                         <div class="trending-like">
@@ -190,6 +239,7 @@
                             <div>
                                 <h4>Char Kway Teow</h4>
                                 <p>Stall #12 • 156 orders today</p>
+                                <div class="rating-badge-inline"><i class="fas fa-star"></i> 4.8 (910 reviews)</div>
                             </div>
                         </div>
                         <div class="trending-like">
