@@ -45,3 +45,5 @@ document.querySelector('#register-form')?.addEventListener('submit', async event
     showMessage(body.message, false); form.reset();
   } catch (error) { showMessage(friendlyFetchError(error)); }
 });
+
+
