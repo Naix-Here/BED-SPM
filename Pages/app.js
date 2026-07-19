@@ -3,6 +3,14 @@ const express = require('express');
 const path = require('path');
 const sql = require('mssql/msnodesqlv8'); 
 
+// ── Modular route imports ──
+const authRoutes = require('./routes/authRoutes');
+const patronRoutes = require('./routes/patronRoutes');
+const orderHistoryRoutes = require('./routes/orderHistoryRoutes');
+const vendorManagementRoutes = require('./routes/vendorManagementRoutes');
+const sessions = require('./utils/sessionStore');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -12,8 +20,9 @@ process.stdin.resume();
 // Enable CORS so the frontend can communicate seamlessly
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    res.header("Access-Control-Expose-Headers", "Authorization");
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200);
     }
@@ -55,16 +64,15 @@ async function loginHandler(req, res) {
         
         console.log(`✓ User ${loginIdentifier} logged in successfully.`);
         
-        // 🚀 FIXED: Returns the exact user object shape with 'role' to satisfy auth.js
+        // Create a real session so requireLogin middleware can validate the token
+        const user = { id: 1, name: loginIdentifier.split('@')[0], email: loginIdentifier, role: "patron" };
+        const token = sessions.createSession(user);
+        
         return res.json({ 
             success: true, 
             message: "Login successful!",
-            token: "mock-jwt-token-12345",
-            user: {
-                id: 1,
-                email: loginIdentifier,
-                role: "patron"  // Prevents the "undefined (reading 'role')" frontend crash
-            }
+            token,
+            user
         });
     } catch (err) {
         console.error(err);
@@ -113,6 +121,16 @@ app.use(express.static(__dirname));
 app.get('/', (req, res) => {
     res.redirect('/Pages/Login.html');
 });
+
+// ==========================================
+// MODULAR API ROUTES
+// ==========================================
+app.use('/api/auth', authRoutes);
+app.use('/api/patron', patronRoutes);
+app.use('/api/orders', orderHistoryRoutes);
+app.use('/api/vendor', vendorManagementRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 // ==========================================
 // NATIVE SQL SERVER CONNECTION

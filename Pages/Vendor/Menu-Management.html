@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HawkerHub | Menu Management</title><link rel="stylesheet" href="../Css/vendor.css"></head><body><header class="navbar"><a class="logo" href="../Home-Page.html">Hawker<span>Hub</span></a><nav class="nav-links"><a href="Dashboard.html">Dashboard</a><a class="active" href="Menu-Management.html">Menu</a><a href="Rental-Agreements.html">Rentals</a></nav><div class="nav-actions"><span data-user-name></span><a class="avatar" data-user-initials></a><button data-logout>Logout</button></div></header><main class="page-shell"><div class="page-title page-title-row"><div><span class="eyebrow">Vendor portal</span><h1>Menu Management</h1><p>Create, update and organise your menu items with cuisine tags.</p></div><button class="btn btn-primary" id="add-menu-item-btn">+ New Item</button></div><div class="filter-bar"><input id="menu-search" placeholder="Search items…"><select id="menu-stall-filter"><option value="">All stalls</option></select><select id="menu-category-filter"><option value="">All categories</option><option value="main_dish">Main Dish</option><option value="drink">Drink</option><option value="dessert">Dessert</option><option value="snack">Snack</option><option value="add_on">Add-on</option></select><button class="btn btn-secondary btn-small" onclick="loadMenuManagement()">Filter</button></div><div id="menu-items-grid" class="item-grid"><p>Loading menu…</p></div><div class="modal-overlay" id="menu-form-modal"><div class="modal"><h2 id="menu-form-title">New Menu Item</h2><form id="menu-form" onsubmit="return false"><input type="hidden" id="form-item-id"><div class="form-group"><label>Stall *</label><select id="form-stall-id" required></select></div><div class="form-row"><div class="form-group"><label>Name *</label><input id="form-name" required></div><div class="form-group"><label>Price *</label><input id="form-price" type="number" step="0.01" min="0" required></div></div><div class="form-group"><label>Description</label><textarea id="form-description"></textarea></div><div class="form-row"><div class="form-group"><label>Category</label><select id="form-category"><option value="main_dish">Main Dish</option><option value="drink">Drink</option><option value="dessert">Dessert</option><option value="snack">Snack</option><option value="add_on">Add-on</option></select></div><div class="form-group"><label>Cuisine IDs (comma-separated, e.g. 1,2,3)</label><input id="form-cuisine-ids" placeholder="1 = Chinese, 2 = Malay…"></div></div><div class="form-row"><div class="form-group"><label>Promotion price</label><input id="form-promo-price" type="number" step="0.01" min="0"></div><div class="form-group"><label><input id="form-is-available" type="checkbox" checked> Available</label></div></div><div class="form-actions"><button class="btn btn-secondary" type="button" onclick="document.querySelector('#menu-form-modal').classList.remove('open')">Cancel</button><button class="btn btn-primary" id="menu-form-submit">Save</button></div></form></div></div><p id="page-notice" hidden></p></main><footer>© 2026 HawkerHub Global Technologies Pte Ltd.</footer><script src="../Js/vendor.js"></script><script>
+// Menu form logic
+document.querySelector('#add-menu-item-btn')?.addEventListener('click', async () => {
+  document.querySelector('#menu-form-title').textContent = 'New Menu Item';
+  document.querySelector('#form-item-id').value = '';
+  document.querySelector('#menu-form').reset();
+  document.querySelector('#form-is-available').checked = true;
+  document.querySelector('#menu-form-modal').classList.add('open');
+  // Load stalls
+  try {
+    const r = await api('/vendor/stalls');
+    const sel = document.querySelector('#form-stall-id');
+    sel.innerHTML = r.data.map(s => `<option value="${s.StallId}">${s.StallName}</option>`).join('');
+  } catch {}
+});
+
+document.querySelector('#menu-form-submit')?.addEventListener('click', async () => {
+  const id = document.querySelector('#form-item-id').value;
+  const data = {
+    stall_id: parseInt(document.querySelector('#form-stall-id').value),
+    name: document.querySelector('#form-name').value,
+    price: parseFloat(document.querySelector('#form-price').value),
+    description: document.querySelector('#form-description').value,
+    category: document.querySelector('#form-category').value,
+    cuisine_ids: document.querySelector('#form-cuisine-ids').value.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n)),
+    is_available: document.querySelector('#form-is-available').checked,
+    promotion_price: document.querySelector('#form-promo-price').value ? parseFloat(document.querySelector('#form-promo-price').value) : null
+  };
+  if (!data.stall_id || !data.name || isNaN(data.price)) return notice('Stall, name, and price are required.');
+  if (id) await updateMenuItem(parseInt(id), data);
+  else await createMenuItem(data);
+});
+
+// Edit/delete delegation
+document.addEventListener('click', async e => {
+  const editId = e.target.dataset.edit;
+  if (editId) {
+    try {
+      const r = await api(`/vendor/menu-items/${editId}`);
+      const item = r.data;
+      document.querySelector('#menu-form-title').textContent = 'Edit Menu Item';
+      document.querySelector('#form-item-id').value = item.ItemId;
+      document.querySelector('#form-name').value = item.Name;
+      document.querySelector('#form-price').value = item.Price;
+      document.querySelector('#form-description').value = item.Description || '';
+      document.querySelector('#form-category').value = item.Category;
+      document.querySelector('#form-is-available').checked = item.IsAvailable;
+      document.querySelector('#form-promo-price').value = item.PromotionPrice || '';
+      document.querySelector('#form-cuisine-ids').value = (item.Cuisines||[]).map(c => c.CuisineId).join(',');
+      const stalls = await api('/vendor/stalls');
+      document.querySelector('#form-stall-id').innerHTML = stalls.data.map(s => `<option value="${s.StallId}" ${s.StallId===item.StallId?'selected':''}>${s.StallName}</option>`).join('');
+      document.querySelector('#menu-form-modal').classList.add('open');
+    } catch (err) { notice(err.message); }
+  }
+  const delId = e.target.dataset.delete;
+  if (delId) await deleteMenuItem(parseInt(delId));
+});
+</script></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HawkerHub | Rental Agreements</title><link rel="stylesheet" href="../Css/vendor.css"></head><body><header class="navbar"><a class="logo" href="../Home-Page.html">Hawker<span>Hub</span></a><nav class="nav-links"><a href="Dashboard.html">Dashboard</a><a href="Menu-Management.html">Menu</a><a class="active" href="Rental-Agreements.html">Rentals</a></nav><div class="nav-actions"><span data-user-name></span><a class="avatar" data-user-initials></a><button data-logout>Logout</button></div></header><main class="page-shell"><div class="page-title page-title-row"><div><span class="eyebrow">Vendor portal</span><h1>Rental Agreements</h1><p>Track your stall rental agreements, renewals, and upcoming expiries.</p></div><button class="btn btn-primary" id="add-agreement-btn">+ New Agreement</button></div><div id="agreements-list"><p>Loading agreements…</p></div><div class="modal-overlay" id="agreement-form-modal"><div class="modal"><h2 id="agreement-form-title">New Rental Agreement</h2><form id="agreement-form" onsubmit="return false"><input type="hidden" id="form-agreement-id"><div class="form-group"><label>Stall *</label><select id="form-agreement-stall" required></select></div><div class="form-row"><div class="form-group"><label>Start Date *</label><input id="form-start" type="date" required></div><div class="form-group"><label>End Date *</label><input id="form-end" type="date" required></div></div><div class="form-row"><div class="form-group"><label>Monthly Rent ($) *</label><input id="form-rent" type="number" step="0.01" min="0" required></div><div class="form-group"><label>Deposit ($)</label><input id="form-deposit" type="number" step="0.01" min="0"></div></div><div class="form-group"><label>Terms</label><textarea id="form-terms" placeholder="Terms and conditions…"></textarea></div><div class="form-actions"><button class="btn btn-secondary" type="button" onclick="document.querySelector('#agreement-form-modal').classList.remove('open')">Cancel</button><button class="btn btn-primary" id="agreement-form-submit">Save</button></div></form></div></div><p id="page-notice" hidden></p></main><footer>© 2026 HawkerHub Global Technologies Pte Ltd.</footer><script src="../Js/vendor.js"></script><script>
+// Rental agreement form logic
+document.querySelector('#add-agreement-btn')?.addEventListener('click', async () => {
+  document.querySelector('#agreement-form-title').textContent = 'New Rental Agreement';
+  document.querySelector('#form-agreement-id').value = '';
+  document.querySelector('#agreement-form').reset();
+  document.querySelector('#agreement-form-modal').classList.add('open');
+  try {
+    const r = await api('/vendor/stalls');
+    document.querySelector('#form-agreement-stall').innerHTML = r.data.map(s => `<option value="${s.StallId}">${s.StallName}</option>`).join('');
+  } catch {}
+});
+
+document.querySelector('#agreement-form-submit')?.addEventListener('click', async () => {
+  const id = document.querySelector('#form-agreement-id').value;
+  const data = {
+    stall_id: parseInt(document.querySelector('#form-agreement-stall').value),
+    start_date: document.querySelector('#form-start').value,
+    end_date: document.querySelector('#form-end').value,
+    monthly_rent: parseFloat(document.querySelector('#form-rent').value),
+    deposit: document.querySelector('#form-deposit').value ? parseFloat(document.querySelector('#form-deposit').value) : null,
+    terms: document.querySelector('#form-terms').value || null
+  };
+  if (!data.stall_id || !data.start_date || !data.end_date || isNaN(data.monthly_rent)) return notice('Please fill all required fields.');
+  try {
+    if (id) { await api(`/vendor/rental-agreements/${id}`, { method: 'PUT', body: JSON.stringify(data) }); notice('Agreement updated!', false); }
+    else { await api('/vendor/rental-agreements', { method: 'POST', body: JSON.stringify(data) }); notice('Agreement created!', false); }
+    document.querySelector('#agreement-form-modal').classList.remove('open');
+    loadRentalAgreements();
+  } catch (err) { notice(err.message); }
+});
+
+// Edit/delete rental agreements
+document.addEventListener('click', async e => {
+  const editId = e.target.dataset.editAgreement;
+  if (editId) {
+    try {
+      const r = await api(`/vendor/rental-agreements/${editId}`);
+      const a = r.data;
+      document.querySelector('#agreement-form-title').textContent = 'Edit Rental Agreement';
+      document.querySelector('#form-agreement-id').value = a.AgreementId;
+      document.querySelector('#form-start').value = a.StartDate?.split('T')[0];
+      document.querySelector('#form-end').value = a.EndDate?.split('T')[0];
+      document.querySelector('#form-rent').value = a.MonthlyRent;
+      document.querySelector('#form-deposit').value = a.Deposit || '';
+      document.querySelector('#form-terms').value = a.Terms || '';
+      const stalls = await api('/vendor/stalls');
+      document.querySelector('#form-agreement-stall').innerHTML = stalls.data.map(s => `<option value="${s.StallId}" ${s.StallId===a.StallId?'selected':''}>${s.StallName}</option>`).join('');
+      document.querySelector('#agreement-form-modal').classList.add('open');
+    } catch (err) { notice(err.message); }
+  }
+  const delId = e.target.dataset.deleteAgreement;
+  if (delId && confirm('Delete this rental agreement?')) {
+    try { await api(`/vendor/rental-agreements/${delId}`, { method: 'DELETE' }); notice('Agreement deleted.', false); loadRentalAgreements(); } catch (err) { notice(err.message); }
+  }
+});
+</script></body></html>
