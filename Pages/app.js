@@ -1,7 +1,10 @@
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
-const sql = require('mssql/msnodesqlv8'); 
+const authRoutes = require('./routes/authRoutes');
+const patronRoutes = require('./routes/patronRoutes');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 // ── Modular route imports ──
 const authRoutes = require('./routes/authRoutes');
@@ -30,6 +33,11 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname)));
+app.use('/api/auth', authRoutes);
+app.use('/api/patron', patronRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 // ==========================================
 // 🚨 REAL-TIME VS CODE TERMINAL MONITOR
@@ -156,3 +164,4 @@ app.listen(port, () => {
     console.log(`HawkerHub running at http://localhost:${port}`);
     console.log("🚀 Server is active and strictly waiting for button clicks...");
 });
+app.listen(port, () => console.log(`HawkerHub is running at http://localhost:${port}`));
