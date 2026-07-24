@@ -16,6 +16,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.get('/Js/patron.js', (req, res) => res.sendFile(path.join(__dirname, 'db', 'Js', 'patron.js')));
+app.get('/Js/vendor.js', (req, res) => res.sendFile(path.join(__dirname, 'db', 'Js', 'vendor.js')));
 app.use(express.static(path.join(__dirname)));
 app.use('/api/auth', authRoutes);
 app.use('/api/patron', patronRoutes);

@@ -58,9 +58,9 @@ npm install swagger-jsdoc swagger-ui-express
 ```
 
 ### 3. Add Routes to Server
-**Option A** – Use `start.js` (new entry point, no changes to existing `app.js`):
+Run the application with the standard start command. It registers the patron, order-history, and vendor routes:
 ```bash
-node start.js
+npm start
 ```
 
 **Option B** – Add to existing `app.js` (2 lines before `app.use(notFound)`):

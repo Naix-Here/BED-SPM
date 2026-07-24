@@ -9,7 +9,7 @@ function initials(n) { return n.split(' ').map(x => x[0]).slice(0,2).join('').to
 function notice(text, error = true) { const box = document.querySelector('#page-notice'); if (!box) return; box.textContent = text; box.style.color = error ? '#fca5a5' : '#86efac'; box.hidden = false; setTimeout(() => box.hidden = true, 4000); }
 
 async function refreshVendorHeader() {
-  try { const { user } = await api('/auth/me'); document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = user.name); document.querySelectorAll('[data-user-initials]').forEach(el => el.textContent = initials(user.name)); } catch { sessionStorage.clear(); location.href = '../Login.html'; }
+  try { const { user } = await api('/auth/me'); if (user.role !== 'vendor') { location.href = '../Patron/Dashboard.html'; return false; } document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = user.name); document.querySelectorAll('[data-user-initials]').forEach(el => el.textContent = initials(user.name)); return true; } catch { sessionStorage.clear(); location.href = '../Login.html'; return false; }
 }
 
 async function logout() { try { await api('/auth/logout', { method: 'POST' }); } finally { sessionStorage.clear(); location.href = '../Home-Page.html'; } }
@@ -80,7 +80,7 @@ async function loadRentalAgreements() {
 document.addEventListener('DOMContentLoaded', async () => {
   if (!token) return location.href = '../Login.html';
   try {
-    await refreshVendorHeader();
+    if (!await refreshVendorHeader()) return;
     if (document.querySelector('#dashboard-stalls')) await loadVendorDashboard();
     if (document.querySelector('#menu-items-grid')) await loadMenuManagement();
     if (document.querySelector('#agreements-list')) await loadRentalAgreements();

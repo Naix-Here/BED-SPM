@@ -11,10 +11,12 @@ function initials(name) { return name.split(' ').map(x => x[0]).slice(0, 2).join
 function notice(text) { const box = document.querySelector('#page-notice'); if (box) { box.textContent = text; box.hidden = false; } else alert(text); }
 async function refreshHeader() {
   const { user } = await api('/auth/me');
+  if (user.role !== 'patron') { location.href = '../Vendor/Dashboard.html'; return false; }
   document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = user.name);
   document.querySelectorAll('[data-user-initials]').forEach(el => el.textContent = initials(user.name));
   const cart = await api('/patron/cart');
   document.querySelectorAll('[data-cart-count]').forEach(el => el.textContent = cart.reduce((sum, item) => sum + item.quantity, 0));
+  return true;
 }
 async function logout() { try { await api('/auth/logout', { method: 'POST' }); } finally { sessionStorage.clear(); location.href = '../Home-Page.html'; } }
 function cartMarkup(cart) { return cart.map(item => `<div class="cart-item"><div class="mini-food ${item.colour}">${item.emoji}</div><div class="item-details"><h3>${item.name}</h3><p>${item.stall}</p><strong>${money(item.price)}</strong></div><div class="quantity"><button data-change="${item.productId}" data-quantity="${item.quantity - 1}">−</button><span>${item.quantity}</span><button data-change="${item.productId}" data-quantity="${item.quantity + 1}">+</button></div></div>`).join(''); }
@@ -40,7 +42,7 @@ async function loadOrders() { const orders = await api('/patron/orders'); const 
 document.addEventListener('DOMContentLoaded', async () => {
   if (!token) return location.href = '../Login.html';
   try {
-    await refreshHeader();
+    if (!await refreshHeader()) return;
     // Only initialise the feature rendered by the current page.  In particular,
     // the checkout loader redirects an empty cart to Cart.html and must not run
     // when the patron has just landed on the dashboard.

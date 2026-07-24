@@ -10,7 +10,12 @@ const VendorMenu = {
     if (search) { where += ' AND (mi.Name LIKE @search OR mi.Description LIKE @search)'; req.input('search', sql.NVarChar(200), `%${search}%`); }
     if (cuisine) { where += ' AND EXISTS(SELECT 1 FROM dbo.MenuItemCuisines mic JOIN dbo.Cuisines c ON c.CuisineId=mic.CuisineId WHERE mic.ItemId=mi.ItemId AND c.Name=@cuisine)'; req.input('cuisine', sql.NVarChar(100), cuisine); }
     const offset = (page - 1) * limit;
-    const [[{ total }]] = (await (await getPool()).request().query(`SELECT COUNT(*) AS total FROM dbo.MenuItems mi ${where.replace(/@stallId/g,'1').replace(/@category/g,"'main_dish'").replace(/@search/g,"''").replace(/@cuisine/g,"''")}`)).recordsets; // rough count
+    const countRequest = (await getPool()).request();
+    if (stallId) countRequest.input('stallId', sql.Int, stallId);
+    if (category) countRequest.input('category', sql.VarChar(20), category);
+    if (search) countRequest.input('search', sql.NVarChar(200), `%${search}%`);
+    if (cuisine) countRequest.input('cuisine', sql.NVarChar(100), cuisine);
+    const [[{ total }]] = (await countRequest.query(`SELECT COUNT(*) AS total FROM dbo.MenuItems mi ${where}`)).recordsets;
     const items = (await req.input('limit', sql.Int, limit).input('offset', sql.Int, offset).query(`SELECT mi.*,s.StallName,s.StallNumber,(SELECT COUNT(*) FROM dbo.MenuLikes WHERE ItemId=mi.ItemId) AS LikeCount FROM dbo.MenuItems mi JOIN dbo.Stalls s ON s.StallId=mi.StallId ${where} ORDER BY mi.Category,mi.Name OFFSET @offset ROWS FETCH NEXT @limit ROWS ONLY`)).recordset;
     for (const item of items) {
       item.Cuisines = (await (await getPool()).request().input('itemId', sql.Int, item.ItemId).query(`SELECT c.CuisineId,c.Name FROM dbo.MenuItemCuisines mic JOIN dbo.Cuisines c ON c.CuisineId=mic.CuisineId WHERE mic.ItemId=@itemId`)).recordset;
@@ -80,7 +85,7 @@ const VendorMenu = {
   },
 
   async getPopular(limit = 10, stallId = null) {
-    let q = `SELECT mi.*,COUNT(DISTINCT ml.LikeId) AS LikeCount FROM dbo.MenuItems mi LEFT JOIN dbo.MenuLikes ml ON ml.ItemId=mi.ItemId WHERE mi.IsAvailable=1`; const req = (await getPool()).request();
+    let q = `SELECT TOP (@limit) mi.*,COUNT(DISTINCT ml.LikeId) AS LikeCount FROM dbo.MenuItems mi LEFT JOIN dbo.MenuLikes ml ON ml.ItemId=mi.ItemId WHERE mi.IsAvailable=1`; const req = (await getPool()).request();
     if (stallId) { q += ' AND mi.StallId=@stallId'; req.input('stallId', sql.Int, stallId); }
     q += ' GROUP BY mi.ItemId,mi.StallId,mi.Name,mi.Description,mi.Price,mi.Category,mi.ImageUrl,mi.IsAvailable,mi.IsPromotion,mi.PromotionPrice,mi.PromotionStart,mi.PromotionEnd,mi.CreatedAt,mi.UpdatedAt ORDER BY LikeCount DESC';
     req.input('limit', sql.Int, limit);

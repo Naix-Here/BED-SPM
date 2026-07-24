@@ -30,7 +30,8 @@ document.querySelector('#login-form')?.addEventListener('submit', async event =>
     sessionStorage.setItem('hawkerhubToken', body.token);
     sessionStorage.setItem('hawkerhubUser', JSON.stringify(body.user));
     if (body.user.role === 'patron') location.href = 'Patron/Dashboard.html';
-    else { showMessage(`Signed in as ${body.user.role.replace('_', ' ')}. Patron pages are restricted to patrons.`, false); }
+    else if (body.user.role === 'vendor') location.href = 'Vendor/Dashboard.html';
+    else showMessage(`Signed in as ${body.user.role.replace('_', ' ')}. A portal is not available for this role.`, false);
   } catch (error) { showMessage(friendlyFetchError(error)); }
 });
 

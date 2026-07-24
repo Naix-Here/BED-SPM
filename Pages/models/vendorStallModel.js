@@ -24,7 +24,8 @@ const VendorStall = {
   async getDashboard(stallId, period = '30days') {
     const days = { '7days': 7, '30days': 30, '90days': 90, 'year': 365 }[period] || 30;
     const stall = await this.findById(stallId);
-    const [[salesSummary]] = (await (await getPool()).request().input('stallId', sql.Int, stallId).input('days', sql.Int, days).query(`SELECT COUNT(*) AS TotalOrders,COALESCE(SUM(TotalAmount),0) AS TotalRevenue,COALESCE(AVG(TotalAmount),0) AS AvgOrderValue FROM dbo.Orders o JOIN dbo.OrderItems oi ON oi.OrderId=o.OrderId JOIN dbo.Products p ON p.ProductId=oi.ProductId WHERE p.StallName=@stallName AND o.Status='Delivered' AND o.OrderDate>=DATEADD(DAY,-@days,GETDATE())`).setInput('stallName', sql.NVarChar(120), stall?.StallName)).recordsets;
+    const salesRequest = (await getPool()).request().input('stallId', sql.Int, stallId).input('days', sql.Int, days).input('stallName', sql.NVarChar(120), stall?.StallName || '');
+    const [[salesSummary]] = (await salesRequest.query(`SELECT COUNT(*) AS TotalOrders,COALESCE(SUM(TotalAmount),0) AS TotalRevenue,COALESCE(AVG(TotalAmount),0) AS AvgOrderValue FROM dbo.Orders o JOIN dbo.OrderItems oi ON oi.OrderId=o.OrderId JOIN dbo.Products p ON p.ProductId=oi.ProductId WHERE p.StallName=@stallName AND o.Status='Delivered' AND o.OrderDate>=DATEADD(DAY,-@days,GETDATE())`)).recordsets;
     const [[feedbackSummary]] = (await (await getPool()).request().input('stallId', sql.Int, stallId).input('days', sql.Int, days).query(`SELECT COUNT(*) AS TotalReviews,COALESCE(AVG(CAST(Rating AS DECIMAL(3,1))),0) AS AvgRating FROM dbo.Feedbacks WHERE StallId=@stallId AND CreatedAt>=DATEADD(DAY,-@days,GETDATE())`)).recordsets;
     return { period, salesSummary: { totalOrders: salesSummary.TotalOrders, totalRevenue: Number(salesSummary.TotalRevenue), avgOrderValue: Number(salesSummary.AvgOrderValue) }, feedbackSummary: { totalReviews: feedbackSummary.TotalReviews, avgRating: Number(feedbackSummary.AvgRating) } };
   }

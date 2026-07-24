@@ -54,6 +54,10 @@ async function updateMenuItem(req, res, next) {
     if (!existing) throw new AppError('Menu item not found.', 404);
     if (req.user.role === 'vendor' && existing.OwnerId !== req.user.id) throw new AppError('Access denied.', 403);
     const { cuisine_ids, stall_id, ...rest } = req.body;
+    if (stall_id !== undefined && req.user.role === 'vendor') {
+      const stall = await VendorStall.findById(stall_id);
+      if (!stall || stall.OwnerId !== req.user.id) throw new AppError('You can only move an item to your own stall.', 403);
+    }
     const mapped = {};
     if (stall_id !== undefined) mapped.StallId = stall_id;
     if (rest.name !== undefined) mapped.Name = rest.name;
@@ -177,7 +181,9 @@ async function updateRentalAgreement(req, res, next) {
     const existing = await RentalAgreement.findById(id);
     if (!existing) throw new AppError('Rental agreement not found.', 404);
     if (req.user.role === 'vendor' && existing.OwnerId !== req.user.id) throw new AppError('Access denied.', 403);
-    const updated = await RentalAgreement.update(id, req.body);
+    const fieldMap = { start_date: 'StartDate', end_date: 'EndDate', monthly_rent: 'MonthlyRent', deposit: 'Deposit', terms: 'Terms', status: 'Status', signed_date: 'SignedDate' };
+    const data = Object.fromEntries(Object.entries(req.body).map(([key, value]) => [fieldMap[key] || key, value]));
+    const updated = await RentalAgreement.update(id, data);
     res.json({ success: true, message: 'Agreement updated.', data: updated });
   } catch (err) { next(err); }
 }
