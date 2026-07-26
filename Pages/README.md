@@ -44,8 +44,9 @@
 ### 1. Database Setup
 ```bash
 # Run the main database script first (teammate's file)
-# Then run my migration in SSMS:
+# Then run the feature migrations in SSMS:
 # Open db/features_schema.sql and execute in SSMS against HawkerCentreMS
+# Open db/vouchers_and_promotion_codes.sql and execute in SSMS against HawkerCentreMS
 ```
 
 ### 2. Install Dependencies
