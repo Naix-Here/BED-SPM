@@ -47,18 +47,45 @@
 # Then run the feature migrations in SSMS:
 # Open db/features_schema.sql and execute in SSMS against HawkerCentreMS
 # Open db/vouchers_and_promotion_codes.sql and execute in SSMS against HawkerCentreMS
+# Open patron_menu_rewards_migration.sql and execute in SSMS against HawkerCentreMS
 ```
 
 ### 2. Install Dependencies
 ```bash
-npm install mssql dotenv express
+npm install
 # For testing:
 npm install --save-dev jest supertest
 # For Swagger docs (optional):
 npm install swagger-jsdoc swagger-ui-express
 ```
 
-### 3. Add Routes to Server
+### 3. Google Cloud / Gmail API Setup
+
+Google sign-in on `Login.html` uses a verified Google email to sign the user into an existing HawkerHub account. It also requests the Gmail **read-only** scope for the assignment's Gmail API integration. HawkerHub does not fetch, save, or display mailbox content.
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), create or select a project.
+2. Go to **APIs & Services → Library** and enable the **Gmail API**.
+3. Under **APIs & Services → OAuth consent screen**, choose **External** (or Internal for a school Workspace), fill in the app details, add your test users, and add `https://www.googleapis.com/auth/gmail.readonly` as a scope. Google may require verification before this sensitive scope can be used outside test users.
+4. Under **Credentials**, create an **OAuth client ID** for a **Web application**. Add this authorized redirect URI exactly:
+
+   ```text
+   http://localhost:3000/api/auth/google/callback
+   ```
+
+5. Create a `.env` file beside `app.js` (do not commit it) using the client ID and secret from Google:
+
+   ```env
+   PORT=3000
+   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   GOOGLE_REDIRECT_URI=http://localhost:3000/api/auth/google/callback
+   ```
+
+6. Run `npm start`, open `http://localhost:3000/Login.html`, and choose **Continue with Google**. The verified Google email must already match an active user in `dbo.Users`; create a HawkerHub account with that email first.
+
+For deployment, replace the localhost callback in both Google Cloud and `GOOGLE_REDIRECT_URI` with your HTTPS URL. Never place the client secret in front-end JavaScript or commit `.env`.
+
+### 4. Add Routes to Server
 Run the application with the standard start command. It registers the patron, order-history, and vendor routes:
 ```bash
 npm start
@@ -70,7 +97,7 @@ app.use('/api/orders', require('./routes/orderHistoryRoutes'));
 app.use('/api/vendor', require('./routes/vendorManagementRoutes'));
 ```
 
-### 4. Front-end Pages
+### 5. Front-end Pages
 | Page | Path | Description |
 |------|------|-------------|
 | Order History | `Patron/Order-History.html` | Patrons view/cancel/review orders |
