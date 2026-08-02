@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complaints — SG Hawker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/shared.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-container">
+    <h1>Submit a Complaint</h1>
+    <p class="page-sub">Report an issue with a stall — we take every concern seriously.</p>
+
+    <div id="page-notice" hidden></div>
+
+    <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:24px; align-items:start;">
+      <!-- Form -->
+      <div class="card" style="background:var(--card-bg); border:1px solid var(--border-subtle); border-radius:18px; padding:24px;">
+        <h2 style="font-size:1.2rem; margin-bottom:14px;">New Complaint</h2>
+        <div class="form-group">
+          <label>Stall</label>
+          <select id="c-stall"></select>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" id="c-subject" maxlength="200" placeholder="e.g. Long wait time" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="c-description" rows="5" maxlength="2000" placeholder="Describe what happened in detail..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="submit-btn" type="button">Submit Complaint</button>
+      </div>
+
+      <!-- List -->
+      <div>
+        <h2 style="font-size:1.2rem; margin-bottom:14px;">My Complaints</h2>
+        <div id="complaints-list"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="footer-year"></span> SG Hawker — Singapore Hawker Centre Management System</p>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/complaints.js"></script>
+</body>
+</html>

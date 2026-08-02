@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hygiene Grades — SG Hawker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/vendor.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-shell">
+    <div class="page-title">
+      <span class="eyebrow">NEA Officer Portal</span>
+      <h1>Hygiene Grade History</h1>
+      <p>Track each stall's official hygiene rating over time.</p>
+    </div>
+
+    <div id="page-notice" hidden></div>
+
+    <div class="form-row" style="grid-template-columns:1fr 2fr; align-items:start; gap:24px;">
+      <!-- Stall picker + current grade -->
+      <div class="panel">
+        <h2>Select Stall</h2>
+        <div class="form-group">
+          <label>Stall</label>
+          <select id="hg-stall"></select>
+        </div>
+
+        <div id="current-grade-display" style="margin-top:20px; padding:24px; text-align:center; border:1px solid var(--border); border-radius:14px; background:rgba(0,0,0,.2);">
+          <small style="color:var(--text-dimmed); display:block; margin-bottom:8px;">CURRENT HYGIENE GRADE</small>
+          <div id="current-grade-letter" style="font-size:4rem; font-weight:800; line-height:1;">—</div>
+          <div id="current-grade-meta" style="margin-top:8px; color:var(--text-dimmed); font-size:0.85rem;">Select a stall to see its current grade.</div>
+        </div>
+
+        <div id="issue-form" style="display:none; margin-top:24px; border-top:1px solid var(--border); padding-top:18px;">
+          <h3>Issue New Grade</h3>
+          <div class="form-group">
+            <label>Grade</label>
+            <select id="ng-grade">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Issued Date</label>
+              <input type="date" id="ng-issued" />
+            </div>
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="date" id="ng-expiry" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full" id="issue-grade-btn" type="button">Issue Grade</button>
+        </div>
+      </div>
+
+      <!-- History table -->
+      <div class="panel">
+        <h2>Grade History</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Issued</th>
+                <th>Expiry</th>
+                <th>Grade</th>
+                <th>Linked Inspection</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="hg-tbody">
+              <tr><td colspan="5" style="text-align:center; color:var(--text-dimmed);">Select a stall to view history.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="footer-year"></span> SG Hawker — Singapore Hawker Centre Management System</p>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/nea-hygiene.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engagement Hub — SG Hawker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/shared.css" />
+</head>
+<body class="engagement-page">
+  <header id="navbar" class="navbar"></header>
+
+  <main>
+    <!-- Hero -->
+    <section class="user-hero">
+      <div class="user-header">
+        <span class="hero-badge"><i class="fa-solid fa-heart"></i> Community Hub</span>
+        <h1>Engage, Review, and Shape Your Hawker Centre</h1>
+        <p>Like dishes, share feedback, report issues, and unlock loyalty rewards — all in one place.</p>
+      </div>
+    </section>
+
+    <!-- Overview stats -->
+    <section class="engagement-overview">
+      <div class="overview-card">
+        <div class="overview-icon"><i class="fa-solid fa-heart"></i></div>
+        <h4>Likes Given</h4>
+        <h2 id="stat-likes">0</h2>
+        <span class="trend-up"><i class="fa-solid fa-arrow-up"></i> Curated taste</span>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon"><i class="fa-solid fa-comment"></i></div>
+        <h4>Feedback Submitted</h4>
+        <h2 id="stat-feedback">0</h2>
+        <span>Sharing helps others</span>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <h4>Open Complaints</h4>
+        <h2 id="stat-complaints">0</h2>
+        <span>Resolving quickly</span>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon"><i class="fa-solid fa-stopwatch"></i></div>
+        <h4>Queue Position</h4>
+        <h2 id="stat-queue">—</h2>
+        <span>Stay updated live</span>
+      </div>
+    </section>
+
+    <div class="engagement-grid">
+      <!-- LEFT -->
+      <div class="engagement-grid-left">
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-fire"></i> Trending Dishes</h2>
+          <div id="trending-items"><p style="color:var(--text-dimmed);">Loading…</p></div>
+        </div>
+
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-pen-to-square"></i> Quick Feedback</h2>
+          <div class="form-group">
+            <label>Select Stall</label>
+            <select id="fb-stall" style="width:100%;"></select>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px;">
+            <span style="color:var(--text-dimmed); font-size:0.85rem;">Rating:</span>
+            <div id="star-rating" style="display:flex; gap:4px; cursor:pointer; font-size:1.2rem;">
+              <i class="fa-solid fa-star" data-val="1" style="color:#eab308;"></i>
+              <i class="fa-solid fa-star" data-val="2" style="color:#eab308;"></i>
+              <i class="fa-solid fa-star" data-val="3" style="color:#eab308;"></i>
+              <i class="fa-solid fa-star" data-val="4" style="color:#eab308;"></i>
+              <i class="fa-solid fa-star" data-val="5" style="color:#eab308;"></i>
+            </div>
+            <span id="rating-display" style="color:var(--text-dimmed); font-size:0.85rem;">5 / 5</span>
+          </div>
+          <div class="form-group">
+            <label>Comment (optional)</label>
+            <textarea id="fb-comment" rows="3" placeholder="Share your experience..."></textarea>
+          </div>
+          <button class="btn btn-primary" id="submit-feedback" type="button">Submit Feedback</button>
+        </div>
+
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-circle-exclamation"></i> My Recent Complaints</h2>
+          <div id="my-complaints"><p style="color:var(--text-dimmed);">Loading…</p></div>
+          <a href="/complaints.html" class="btn btn-secondary btn-small" style="margin-top:14px;">Open full complaint form →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="engagement-grid-right">
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-tag"></i> Active Promotions</h2>
+          <div id="promo-list"><p style="color:var(--text-dimmed);">Loading…</p></div>
+        </div>
+
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-trophy"></i> Loyalty Progress</h2>
+          <div class="progress-box">
+            <div class="progress-details"><span>Loyalty Points</span><span id="loyalty-points">0 pts</span></div>
+            <div class="progress-row">
+              <div class="progress"><div class="progress-fill" id="loyalty-bar" style="width:0%;"></div></div>
+            </div>
+            <small style="color:var(--text-dimmed); display:block; margin-top:6px;">
+              Earn 1 point per $1 spent. 200 points = $10 voucher.
+            </small>
+          </div>
+          <div class="metric-container">
+            <div class="metric"><h2 id="m-feedback">0</h2><p>Reviews</p></div>
+            <div class="metric"><h2 id="m-likes">0</h2><p>Likes</p></div>
+            <div class="metric"><h2 id="m-orders">0</h2><p>Orders</p></div>
+          </div>
+        </div>
+
+        <div class="engagement-card">
+          <h2><i class="fa-solid fa-star"></i> Recent Reviews</h2>
+          <div id="recent-reviews"><p style="color:var(--text-dimmed);">Loading…</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="footer-year"></span> SG Hawker — Singapore Hawker Centre Management System</p>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/engagement.js"></script>
+</body>
+</html>
