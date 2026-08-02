@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — SG Hawker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar"></nav>
+
+  <main style="padding: 60px 6%; max-width: 80vw; width: 40%; margin: 0 auto;">
+    <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 36px;">
+      <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Welcome Back</h1>
+      <p style="color: var(--text-dimmed); margin-bottom: 28px;">Sign in to your SG Hawker account</p>
+
+      <div id="login-error" style="display:none; padding:12px 16px; background:var(--danger-soft); color:var(--danger); border-radius:10px; margin-bottom:20px; font-size:0.88rem;"></div>
+
+      <div style="margin-bottom: 18px;">
+        <label style="display:block; color:var(--text-dimmed); font-size:0.82rem; font-weight:600; margin-bottom:6px;">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" style="width:100%; padding:12px; background:#070c16; border:1px solid var(--border-subtle); color:#fff; border-radius:10px; outline:none; font:inherit;" />
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display:block; color:var(--text-dimmed); font-size:0.82rem; font-weight:600; margin-bottom:6px;">Password</label>
+        <input type="password" id="password" placeholder="••••••••" style="width:100%; padding:12px; background:#070c16; border:1px solid var(--border-subtle); color:#fff; border-radius:10px; outline:none; font:inherit;" />
+      </div>
+
+      <button class="btn btn-primary btn-full btn-large" id="login-btn" type="button">Sign In</button>
+
+      <p style="text-align:center; margin-top:22px; color:var(--text-dimmed); font-size:0.88rem;">
+        Don't have an account? <a href="/register.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Register</a>
+      </p>
+      <p style="text-align:center; margin-top:10px;">
+        <a href="/stalls.html" style="color:var(--text-dimmed); text-decoration:none; font-size:0.85rem;">Continue as Guest →</a>
+      </p>
+    </div>
+
+    <p style="text-align:center; color:var(--text-dimmed); font-size:0.78rem; margin-top:24px;">
+      Demo accounts (password: <code>Password123</code>):<br />
+      <code>customer1@test.com</code> · <code>vendor1@test.com</code> · <code>nea1@test.com</code> · <code>operator1@test.com</code>
+    </p>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SG Hawker — Singapore Hawker Centre Management System</p>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

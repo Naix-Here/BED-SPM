@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor Dashboard — SHCMS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/shared.css" />
+  <link rel="stylesheet" href="/css/vendor.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-shell">
+    <!-- Page title row -->
+    <div class="page-title-row">
+      <div>
+        <h1>Dashboard</h1>
+        <p id="stallName" style="color:var(--muted);">Loading your stall…</p>
+      </div>
+      <a href="/vendor-orders.html" class="btn btn-secondary btn-small">
+        <i class="fa-solid fa-list"></i> &nbsp;View All Orders
+      </a>
+    </div>
+
+    <!-- Metrics row -->
+    <div class="metrics-row" id="metricsRow">
+      <div class="metric-card">
+        <span class="value" id="metricPending">—</span>
+        <span class="label">Pending Orders</span>
+      </div>
+      <div class="metric-card">
+        <span class="value" id="metricRating">—</span>
+        <span class="label">Average Rating</span>
+      </div>
+      <div class="metric-card">
+        <span class="value" id="metricHygiene">—</span>
+        <span class="label">Current Hygiene Grade</span>
+      </div>
+    </div>
+
+    <div class="two-column">
+      <!-- Recent orders panel -->
+      <div class="panel">
+        <h2 style="margin-bottom:14px;">Recent Orders</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTbody">
+              <tr><td colspan="7" style="text-align:center;color:var(--muted);">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick links panel -->
+      <div class="panel">
+        <h2 style="margin-bottom:14px;">Quick Links</h2>
+        <div style="display:grid;gap:10px;">
+          <a href="/vendor-menu.html" class="btn btn-primary btn-full">
+            <i class="fa-solid fa-utensils"></i> &nbsp;Manage Menu
+          </a>
+          <a href="/vendor-orders.html" class="btn btn-secondary btn-full">
+            <i class="fa-solid fa-receipt"></i> &nbsp;Incoming Orders
+          </a>
+          <a href="/vendor-rentals.html" class="btn btn-secondary btn-full">
+            <i class="fa-solid fa-file-contract"></i> &nbsp;Rental Agreements
+          </a>
+        </div>
+
+        <h2 style="margin-top:24px;margin-bottom:14px;">Stall Performance</h2>
+        <div id="perfSummary" style="font-size:.88rem;color:var(--muted);">
+          <p style="margin:0 0 6px;">Total orders: <strong id="perfTotal">—</strong></p>
+          <p style="margin:0 0 6px;">Completed: <strong id="perfCompleted">—</strong></p>
+          <p style="margin:0 0 6px;">Revenue: <strong id="perfRevenue">—</strong></p>
+          <p style="margin:0 0 6px;">Feedback: <strong id="perfFeedback">—</strong></p>
+          <p style="margin:0 0 6px;">Total likes: <strong id="perfLikes">—</strong></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SHCMS — Singapore Hawker Centre Management System. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="/credit.html" title="Credits"><i class="fa-solid fa-circle-info"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/vendor-dashboard.js"></script>
+  <script>renderNavbar('dashboard');</script>
+</body>
+</html>
