@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Tracking — SG Hawker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-container">
+    <h1>Order Tracking</h1>
+    <p class="page-sub" id="tracking-sub">Live status updates for your order.</p>
+
+    <div id="page-notice" hidden></div>
+
+    <div id="tracking-content" class="tracking-board" style="max-width:680px; margin:0 auto;">
+      <p style="color:var(--text-dimmed);">Loading order…</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SG Hawker — Singapore Hawker Centre Management System</p>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/order-tracking.js"></script>
+</body>
+</html>

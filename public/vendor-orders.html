@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incoming Orders — SHCMS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/shared.css" />
+  <link rel="stylesheet" href="/css/vendor.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-shell">
+    <div class="page-title-row">
+      <div>
+        <h1>Incoming Orders</h1>
+        <p id="subtitle" style="color:var(--muted);">Loading…</p>
+      </div>
+      <span id="newBadge" class="tag tag-warning" style="display:none;font-size:.85rem;padding:8px 14px;">
+        <i class="fa-solid fa-bell"></i> &nbsp;<span id="newBadgeText">0</span> new
+      </span>
+    </div>
+
+    <div id="page-notice" hidden></div>
+
+    <div class="filter-bar">
+      <select id="statusFilter">
+        <option value="">All statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Preparing">Preparing</option>
+        <option value="Ready">Ready</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+      <select id="ageFilter">
+        <option value="">All time</option>
+        <option value="today">Today</option>
+        <option value="week">This week</option>
+      </select>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Customer</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTbody">
+          <tr><td colspan="7" style="text-align:center;color:var(--muted);">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SHCMS — Singapore Hawker Centre Management System. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="/credit.html" title="Credits"><i class="fa-solid fa-circle-info"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/vendor-orders.js"></script>
+  <script>renderNavbar('orders');</script>
+</body>
+</html>

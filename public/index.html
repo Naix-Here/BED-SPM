@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHCMS — Singapore Hawker Centre Management System</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="/css/shared.css" />
+  <link rel="stylesheet" href="/css/something.css" />
+  <link rel="stylesheet" href="/css/vendor.css" />
+</head>
+<body>
+  <!-- Navbar (populated by shared.js) -->
+  <header id="navbar" class="navbar"></header>
+
+  <main id="customer-view-container">
+    <!-- HERO -->
+    <section class="hero-container">
+      <div class="hero-text">
+        <span class="hero-tag"><i class="fa-solid fa-fire"></i> &nbsp;Singapore's Smart Hawker Hub</span>
+        <h1>One platform for every plate in the hawker centre.</h1>
+        <p>
+          Browse stalls, order your favourites, track live queue numbers, and stay
+          updated on hygiene and inspections — all from a single, beautifully simple
+          dashboard.
+        </p>
+        <div class="hero-cta">
+          <a href="/stalls.html" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-utensils"></i> Browse Stalls
+          </a>
+          <a href="/register.html" class="btn btn-secondary btn-large">
+            Create Account
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-mockup" aria-hidden="true">
+          <div class="mockup-header">
+            <span class="dot" style="background:#ef4444"></span>
+            <span class="dot" style="background:#eab308"></span>
+            <span class="dot" style="background:#22c55e"></span>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-line wide"></div>
+            <div class="mockup-line medium"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-stats">
+              <div>
+                <span>120+</span>
+                <p>Hawker Stalls</p>
+              </div>
+              <div>
+                <span>4.8★</span>
+                <p>Avg. Rating</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- PORTALS -->
+    <section class="portals-section">
+      <div class="section-header">
+        <h2>Three portals, one hawker centre.</h2>
+        <p>Whether you're a hungry customer, a busy vendor, or an NEA officer — we've got you covered.</p>
+      </div>
+
+      <div class="features-promo-grid">
+        <a href="/stalls.html" class="promo-card" style="text-decoration:none;color:inherit;">
+          <div class="promo-icon"><i class="fa-solid fa-bowl-food"></i></div>
+          <h3>Customer Portal</h3>
+          <p style="color:var(--text-dimmed);">Browse stalls, place orders, track live status, and leave feedback.</p>
+        </a>
+
+        <a href="/login.html" class="promo-card" style="text-decoration:none;color:inherit;">
+          <div class="promo-icon"><i class="fa-solid fa-store"></i></div>
+          <h3>Vendor Portal</h3>
+          <p style="color:var(--text-dimmed);">Manage your menu, incoming orders, promotions, and rental agreements.</p>
+        </a>
+
+        <a href="/login.html" class="promo-card" style="text-decoration:none;color:inherit;">
+          <div class="promo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>NEA Portal</h3>
+          <p style="color:var(--text-dimmed);">Schedule inspections, log scores, and issue hygiene grades to stalls.</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- CULINARY SHOWCASE -->
+    <section class="portals-section">
+      <div class="section-header">
+        <h2>Top sellers this week</h2>
+        <p>Fresh from the wok. Real-time popularity, curated by our community.</p>
+      </div>
+
+      <div class="menu-items-grid" id="top-sellers-grid">
+        <!-- Populated by home.js -->
+        <div class="food-card top-seller-card">
+          <div class="food-header">
+            <span class="cuisine-tag">Loading…</span>
+          </div>
+          <h3>Fetching the most-loved dishes…</h3>
+          <p>Hang tight while we pull the latest data from the API.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- LIVE ORDER TRACKER -->
+    <section class="portals-section">
+      <div class="section-header">
+        <h2>Track your order</h2>
+        <p>Enter your order number to see live status updates from the kitchen.</p>
+      </div>
+
+      <form class="tracker-input-wrapper" id="tracker-form" onsubmit="return trackOrder(event)">
+        <input type="text" id="tracker-input" placeholder="e.g. 1" inputmode="numeric" required />
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Track</button>
+      </form>
+      <div id="tracker-result" style="margin-top:20px;"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SHCMS — Singapore Hawker Centre Management System. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="/credit.html" title="Credits"><i class="fa-solid fa-circle-info"></i></a>
+        <a href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/home.js"></script>
+  <script>
+    renderNavbar('home');
+
+    async function trackOrder(event) {
+      event.preventDefault();
+      const id = document.getElementById('tracker-input').value.trim();
+      const result = document.getElementById('tracker-result');
+      result.innerHTML = '<p style="color:var(--text-dimmed);">Looking up order…</p>';
+
+      try {
+        const res = await apiFetch('/orders/' + encodeURIComponent(id));
+        const order = res.data || res;
+        result.innerHTML = `
+          <div class="promo-card" style="display:inline-block;min-width:320px;">
+            <div class="promo-icon"><i class="fa-solid fa-receipt"></i></div>
+            <h3>Order #${escapeHtml(order.OrderId ?? order.orderId)}</h3>
+            <p style="color:var(--text-dimmed);">Status: <strong>${escapeHtml(order.Status ?? order.status)}</strong></p>
+            <p style="color:var(--text-dimmed);">Total: ${formatPrice(order.TotalAmount ?? order.totalAmount)}</p>
+          </div>
+        `;
+      } catch (err) {
+        result.innerHTML = `<p style="color:var(--danger);">${escapeHtml(err.message)}</p>`;
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>

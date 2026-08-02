@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stall Details — SHCMS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/shared.css" />
+  <link rel="stylesheet" href="/css/something.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-shell">
+    <!-- Stall header -->
+    <section class="welcome-banner stall-hero" id="stallHeader">
+      <div class="stall-hero-image" id="stallHeroImage" aria-hidden="true"></div>
+      <div class="stall-hero-overlay"></div>
+      <div class="stall-hero-body">
+        <span class="eyebrow" id="stallHawkerCentre">Loading…</span>
+        <h1 id="stallName">Stall</h1>
+        <p style="max-width:600px;" id="stallDescription">Loading stall details…</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;" id="stallCuisines"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;" id="stallTags"></div>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="/feedback.html?stallId=&nbsp;" id="feedbackLink" class="btn btn-secondary btn-small">
+            <i class="fa-solid fa-comments"></i> &nbsp;View Feedback
+          </a>
+          <button class="btn btn-primary btn-small" id="joinQueueBtn" style="display:none;">
+            <i class="fa-solid fa-list-ol"></i> &nbsp;Join Queue
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotions -->
+    <section class="section-heading compact" id="promoSection" style="display:none;">
+      <div>
+        <h2><i class="fa-solid fa-tag" style="color:var(--accent);"></i> &nbsp;Active Promotions</h2>
+        <p>Special offers from this stall right now.</p>
+      </div>
+    </section>
+    <div class="voucher-grid" id="promoGrid" style="display:none;"></div>
+
+    <!-- Menu -->
+    <section class="section-heading compact">
+      <div>
+        <h2><i class="fa-solid fa-utensils" style="color:var(--accent);"></i> &nbsp;Menu</h2>
+        <p>Tap "Add to Cart" or like a dish you love.</p>
+      </div>
+    </section>
+    <div class="dish-grid" id="menuGrid">
+      <div class="dish-card"><div class="dish-content">Loading menu…</div></div>
+    </div>
+
+    <!-- Recent feedback -->
+    <section class="section-heading compact" id="feedbackSection" style="display:none;">
+      <div>
+        <h2><i class="fa-solid fa-comments" style="color:var(--accent);"></i> &nbsp;Recent Reviews</h2>
+        <p>What customers are saying.</p>
+      </div>
+    </section>
+    <div id="feedbackList"></div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SHCMS — Singapore Hawker Centre Management System. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="/credit.html" title="Credits"><i class="fa-solid fa-circle-info"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/stall-detail.js"></script>
+  <script>renderNavbar('stalls');</script>
+</body>
+</html>

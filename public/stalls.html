@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Stalls — SHCMS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="/css/shared.css" />
+  <link rel="stylesheet" href="/css/something.css" />
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+
+  <main class="page-shell">
+    <!-- Welcome banner -->
+    <section class="welcome-banner">
+      <div>
+        <span class="eyebrow">All Hawker Centres</span>
+        <h1>Browse Stalls</h1>
+        <p style="max-width:540px;">
+          Discover the best hawker stalls in Singapore. Filter by hawker centre, browse cuisines,
+          and tap a card to view the full menu.
+        </p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:2.4rem;font-weight:800;" id="stallCount">—</div>
+        <div style="color:var(--muted);">stalls available</div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <div class="filter-bar" style="margin-top:30px;">
+      <input type="search" id="searchInput" placeholder="Search stall name…" style="flex:1;min-width:240px;" />
+      <select id="hawkerCentreFilter">
+        <option value="">All Hawker Centres</option>
+      </select>
+      <select id="cuisineFilter">
+        <option value="">All Cuisines</option>
+      </select>
+    </div>
+
+    <!-- Stalls grid -->
+    <section class="section-heading">
+      <div>
+        <h2>Stalls</h2>
+        <p>Tap a stall to see its menu, promotions, and reviews.</p>
+      </div>
+    </section>
+
+    <div class="quick-grid" id="stallsGrid">
+      <div class="quick-card">
+        <strong>Loading stalls…</strong>
+        <span>Hang tight while we fetch the directory.</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="footer-year"></span> SHCMS — Singapore Hawker Centre Management System. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="/credit.html" title="Credits"><i class="fa-solid fa-circle-info"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/stalls.js"></script>
+  <script>renderNavbar('stalls');</script>
+</body>
+</html>
