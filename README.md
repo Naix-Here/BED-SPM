@@ -1,4 +1,4 @@
-# HawkerHub — Hawker Centre Management API
+# BED Assignment - HawkerHub — Hawker Centre Management System API
 
 HawkerHub is an Express and SQL Server backend for browsing hawker stalls, managing menus, placing orders, and supporting vendor and operator workflows. The API uses JWT bearer authentication for protected routes and role-based access for Customer, Vendor, Operator, and NEA Officer actions.
 
